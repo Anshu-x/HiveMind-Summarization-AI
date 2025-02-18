@@ -1,16 +1,21 @@
 import nltk
 import os
-
-# Explicitly set NLTK data path
-nltk.data.path.append("/opt/render/nltk_data")
-
-# Ensure 'punkt' is downloaded
-nltk.download('punkt')
-
 from flask import Flask, request, jsonify
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.text_rank import TextRankSummarizer
+
+# Ensure NLTK tokenizers are available
+nltk_data_path = "/opt/render/nltk_data"
+os.makedirs(nltk_data_path, exist_ok=True)
+nltk.data.path.append(nltk_data_path)
+
+try:
+    nltk.download('punkt', download_dir=nltk_data_path)
+    nltk.download('punkt_tab', download_dir=nltk_data_path)
+    print("✅ NLTK Punkt & Punkt_tab downloaded successfully")
+except Exception as e:
+    print(f"❌ Error downloading NLTK resources: {e}")
 
 app = Flask(__name__)
 
@@ -21,9 +26,10 @@ def summarize_text(text, num_sentences):
     parser = PlaintextParser.from_string(text, Tokenizer("english"))
     summarizer = TextRankSummarizer()
     summary = summarizer(parser.document, num_sentences)
-
+    
     unique_summary = list(dict.fromkeys([str(sentence) for sentence in summary]))
-    return " ".join(unique_summary)
+    summary_text = " ".join(unique_summary)
+    return summary_text
 
 @app.route('/')
 def home():
