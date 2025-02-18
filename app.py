@@ -1,3 +1,6 @@
+import nltk
+nltk.download('punkt')
+
 from flask import Flask, request, jsonify
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
