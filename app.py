@@ -3,24 +3,17 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.text_rank import TextRankSummarizer
 import os
-import nltk
-
-# Ensure NLTK punkt resource is downloaded
-nltk.download('punkt')
 
 app = Flask(__name__)
 
 def summarize_text(text, num_sentences):
-    # Validate input
     if not text or not isinstance(text, str):
         raise ValueError("Invalid input. Please provide a valid text string.")
     
-    # Preprocess and summarize text with TextRank
     parser = PlaintextParser.from_string(text, Tokenizer("english"))
     summarizer = TextRankSummarizer()
-    summary = summarizer(parser.document, num_sentences)  # Summarize to the specified number of sentences
+    summary = summarizer(parser.document, num_sentences)
 
-    # Remove duplicate sentences
     unique_summary = list(dict.fromkeys([str(sentence) for sentence in summary]))
     summary_text = " ".join(unique_summary)
     return summary_text
@@ -34,9 +27,8 @@ def summarize_endpoint():
     try:
         data = request.json
         text = data.get('text', '')
-        num_sentences = data.get('num_sentences', 12)  # Default to 12 sentences if not specified
+        num_sentences = data.get('num_sentences', 12)
 
-        # Ensure text is provided
         if not text.strip():
             return jsonify(error="Text cannot be empty"), 400
 
