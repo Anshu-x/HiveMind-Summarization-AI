@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Ensure nltk punkt tokenizer is available
-python -c "import nltk; nltk.download('punkt')"
+echo "Downloading NLTK data..."
+python -c "import nltk; nltk.download('punkt'); print('NLTK punkt downloaded successfully')"
 
-# Run the Flask app
-python app.py
+echo "Starting Flask app..."
+exec python app.py
