@@ -3,7 +3,10 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.text_rank import TextRankSummarizer
 import os
+import nltk
 
+# Ensure NLTK punkt resource is downloaded
+nltk.download('punkt')
 
 app = Flask(__name__)
 
@@ -32,13 +35,17 @@ def summarize_endpoint():
         data = request.json
         text = data.get('text', '')
         num_sentences = data.get('num_sentences', 12)  # Default to 12 sentences if not specified
+
+        # Ensure text is provided
+        if not text.strip():
+            return jsonify(error="Text cannot be empty"), 400
+
         summary = summarize_text(text, num_sentences)
         return jsonify(summary=summary)
     except ValueError as ve:
         return jsonify(error=str(ve)), 400
     except Exception as e:
-        return jsonify(error=str(e)), 500
-
+        return jsonify(error="An error occurred during summarization. " + str(e)), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
