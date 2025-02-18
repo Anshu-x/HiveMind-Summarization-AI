@@ -1,0 +1,5 @@
+flask
+sumy
+nltk
+requests
+numpy
