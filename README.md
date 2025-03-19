@@ -130,9 +130,3 @@ Sumy	Text Summarization
 
 💡 Contributions welcome! Feel free to submit a PR or open an issue. 👊
 
----
-
-### 🔥 **Changes Made:**  
-✅ Added a **"Live Demo"** section with a clickable link.  
-✅ Clean and professional layout.  
-✅ Sample output + code breakdown included.  
