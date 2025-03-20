@@ -3,9 +3,6 @@
 
 An advanced text summarization model using **Sumy + TextRank** and **NLTK** for accurate and context-aware text summarization.  
 
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/674621/71187836-6f41f580-227a-11ea-9498-ffb7bb9aa4d5.gif" alt="Demo GIF" width="600"/>
-</p>  
 
 ---
 
@@ -24,11 +21,11 @@ An advanced text summarization model using **Sumy + TextRank** and **NLTK** for 
 
 ## 🏗️ **Project Structure**  
 HiveMind-Summarization-AI
-├── 📄 .gitignore # Ignored files
-├── 📄 app.py # Flask app for prediction
-├── 📄 requirements.txt # Dependencies
-├── 📄 startup.sh # Shell script for deployment
-└── 📄 README.md # Project documentation
+├── 📄 .gitignore 
+├── 📄 app.py
+├── 📄 requirements.txt 
+├── 📄 startup.sh 
+└── 📄 README.md
 
 ---
 
